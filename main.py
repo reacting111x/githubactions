@@ -1,8 +1,9 @@
-def add(a, b):
-    result = a + b
-    with open('result.txt', 'w') as f:
-        f.write(f"resultoutput={result}")
-    return result
+# main.py
+
+def write_apple():
+    with open('test.txt', 'w') as f:
+        f.write('apple')
 
 if __name__ == "__main__":
-    print(add(2, 44444))
+    write_apple()
+    print("Updated test.txt with 'apple'")
