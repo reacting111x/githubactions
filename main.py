@@ -1,7 +1,7 @@
 def add(a, b):
     result = a + b
     with open('result.txt', 'w') as f:
-        f.write(str(result))
+        f.write(f"resultoutput={result}")
     return result
 
 if __name__ == "__main__":
