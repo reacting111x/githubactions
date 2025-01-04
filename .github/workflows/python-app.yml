@@ -1,6 +1,9 @@
 name: Python application
 
-on: [push]
+on:
+  push:
+    branches:
+      - '*'
 
 jobs:
   build:
@@ -26,4 +29,3 @@ jobs:
     - name: Use result in another step
       run: |
         echo "The result of the addition is: ${{ steps.run-script.outputs.result }}"
- 
