@@ -30,4 +30,4 @@ jobs:
         echo "result=$(cat result.txt)" >> $GITHUB_ENV
     - name: Use result in another step
       run: |
-        echo "The result of the addition is: ${{ env.result }}"
+        echo "The result of the addition is: ${{ env.result }}" 
