@@ -20,11 +20,14 @@ jobs:
       run: |
         python -m pip install --upgrade pip
     - name: Run script
+      id: run-script
       run: |
         python main.py
     - name: Save result to a file
+      id: save-result
       run: |
-        echo "::set-output name=result::$(cat result.txt)"
+        cat result.txt
+        echo "result=$(cat result.txt)" >> $GITHUB_ENV
     - name: Use result in another step
       run: |
-        echo "The result of the addition is: ${{ steps.save-result-to-a-file.outputs.result }}"
+        echo "The result of the addition is: ${{ env.result }}"
