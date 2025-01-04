@@ -23,11 +23,17 @@ jobs:
       id: run-script
       run: |
         python main.py
-    - name: Save result to a file
-      id: save-result
+    - name: Save result to environment
       run: |
         cat result.txt
         echo "result=$(cat result.txt)" >> $GITHUB_ENV
+    - name: Commit result.txt
+      run: |
+        git config --global user.name 'github-actions'
+        git config --global user.email 'github-actions@github.com'
+        git add result.txt
+        git commit -m "Update result.txt"
+        git push
     - name: Use result in another step
       run: |
-        echo "The result of the addition is: ${{ env.result }}" 
+        echo "The result of the addition is: ${{ env.result }}"
