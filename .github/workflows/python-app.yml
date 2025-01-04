@@ -28,14 +28,12 @@ jobs:
         cat result.txt
         echo "result=$(cat result.txt)" >> $GITHUB_ENV
     - name: Commit result.txt
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git config --global user.name 'github-actions'
         git config --global user.email 'github-actions@github.com'
         git add result.txt
         git commit -m "Update result.txt"
-        git push https://github.com/${{ github.repository }}.git HEAD:main
+        git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
     - name: Use result in another step
       run: |
         echo "The result of the addition is: ${{ env.result }}"
