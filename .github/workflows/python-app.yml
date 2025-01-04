@@ -13,13 +13,16 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
         python-version: '3.x'
+
     - name: Run script to update test.txt
       run: |
         python main.py
+
     - name: Commit updated test.txt
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -28,4 +31,4 @@ jobs:
         git config --global user.email 'github-actions@github.com'
         git add test.txt
         git commit -m "Update test.txt with 'apple'"
-        git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+        git push
