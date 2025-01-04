@@ -1,4 +1,4 @@
-name: Python application
+name: Simple Update
 
 on:
   push:
@@ -11,31 +11,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
         python-version: '3.x'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-    - name: Run script
-      id: run-script
+    - name: Run script to update test.txt
       run: |
         python main.py
-    - name: Save result to environment
-      run: |
-        cat result.txt
-        echo "result=$(cat result.txt)" >> $GITHUB_ENV
-    - name: Commit result.txt
-      env:
-        GITHUB_PAT: ${{ secrets.PAT }}
+    - name: Commit updated test.txt
       run: |
         git config --global user.name 'github-actions'
         git config --global user.email 'github-actions@github.com'
-        git add result.txt
-        git commit -m "Update result.txt"
-        git push https://${{ secrets.PAT }}@github.com/${{ github.repository }}.git HEAD:main
-    - name: Use result in another step
-      run: |
-        echo "The result of the addition is: ${{ env.result }}"
+        git add test.txt
+        git commit -m "Update test.txt with 'apple'"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
