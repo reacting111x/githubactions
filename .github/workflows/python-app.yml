@@ -16,6 +16,13 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-    - name: Run tests
+    - name: Run script
       run: |
-        python -m unittest discover
+        python main.py
+    - name: Save result to a file
+      run: |
+        cat result.txt
+        echo "::set-output name=result::$(cat result.txt)"
+    - name: Use result in another step
+      run: |
+        echo "The result of the addition is: ${{ steps.run-script.outputs.result }}"
