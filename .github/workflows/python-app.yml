@@ -26,3 +26,4 @@ jobs:
     - name: Use result in another step
       run: |
         echo "The result of the addition is: ${{ steps.run-script.outputs.result }}"
+ 
